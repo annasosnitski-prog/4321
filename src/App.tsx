@@ -11,8 +11,8 @@ import { SettingsScreen } from './screens/SettingsScreen';
 type Tab = 'main' | 'report' | 'settings';
 
 export default function App() {
-  const { settings, loading: sLoading, updateSettings } = useSettings();
-  const { receipts, lastReceipt, loading: rLoading, issueReceipt, reload } = useReceipts();
+  const { settings, loading: sLoading, updateSettings, reload: reloadSettings } = useSettings();
+  const { receipts, lastReceipt, loading: rLoading, issueReceipt, reload: reloadReceipts } = useReceipts();
 
   const [screen, setScreen] = useState<Screen>('main');
   const [activeTab, setActiveTab] = useState<Tab>('main');
@@ -61,7 +61,8 @@ export default function App() {
             onIssue={(form) => issueReceipt(form, settings)}
             onBack={() => navTo('main')}
             onViewAfterIssue={(id) => {
-              reload();
+              reloadReceipts();
+              reloadSettings();
               navTo({ type: 'view', id });
             }}
           />

@@ -19,7 +19,7 @@ function buildReceiptHTML(r: Receipt, s: BusinessSettings): string {
     color: #111;
     font-size: 14px;
     line-height: 1.6;
-    padding: 28px 24px;
+    padding: 52px 24px 28px;
     max-width: 580px;
     margin: 0 auto;
   }
@@ -67,6 +67,22 @@ function buildReceiptHTML(r: Receipt, s: BusinessSettings): string {
     font-weight: 600;
   }
   .note-box { background: #fafafa; border-radius: 4px; padding: 10px; font-size: 13px; color: #555; margin-top: 6px; }
+  .close-btn {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 999;
+    background: #1A1A1A;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    direction: ltr;
+  }
+  @media print { .close-btn { display: none; } }
   .footer {
     text-align: center;
     color: #999;
@@ -83,6 +99,7 @@ function buildReceiptHTML(r: Receipt, s: BusinessSettings): string {
 </style>
 </head>
 <body>
+<button class="close-btn" onclick="window.close()">✕ Закрыть</button>
 <div class="header">
   <div class="brand">קבלה</div>
   <div class="brand-sub">RECEIPT</div>
@@ -167,7 +184,7 @@ function buildReportHTML(
   body {
     font-family: Arial, Helvetica, sans-serif;
     direction: rtl;
-    padding: 24px;
+    padding: 52px 24px 24px;
     font-size: 13px;
     color: #111;
     max-width: 750px;
@@ -187,13 +204,30 @@ function buildReportHTML(
   tr:nth-child(even) td { background: #fafafa; }
   .tot-row td { font-weight: 700; background: #efefef !important; border-top: 2px solid #ccc; }
   .footer { text-align: center; color: #aaa; font-size: 11px; margin-top: 28px; padding-top: 14px; border-top: 1px solid #eee; }
+  .close-btn {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 999;
+    background: #1A1A1A;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    direction: ltr;
+  }
   @media print {
     body { padding: 12px; }
     @page { margin: 12mm; size: A4 landscape; }
+    .close-btn { display: none; }
   }
 </style>
 </head>
 <body>
+<button class="close-btn" onclick="window.close()">✕ Закрыть</button>
 <h1>דוח הכנסות</h1>
 <div class="sub">
   ${s.ownerName} &nbsp;|&nbsp; עוסק פטור ${s.oseqNumber}<br>
