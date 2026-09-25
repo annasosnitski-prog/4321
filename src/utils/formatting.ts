@@ -31,8 +31,9 @@ export function prevMonthRange(): { from: string; to: string } {
 }
 
 export function formatCurrency(amount: number): string {
-  const n = amount.toLocaleString('ru-RU', { maximumFractionDigits: 2 });
-  return `₪${n}`;
+  const sign = amount < 0 ? '-' : '';
+  const n = Math.abs(amount).toLocaleString('ru-RU', { maximumFractionDigits: 2 });
+  return `${sign}₪${n}`;
 }
 
 export const PAYMENT_RU: Record<string, string> = {

@@ -4,6 +4,9 @@ import { formatDate, formatCurrency, PAYMENT_RU, PAYMENT_HE } from './formatting
 // ─── Receipt HTML ────────────────────────────────────────────────────────────
 
 function buildReceiptHTML(r: Receipt, s: BusinessSettings): string {
+  const isStorno = r.docType === 'storno';
+  const docTitleHe = isStorno ? 'זיכוי' : 'קבלה';
+  const docTitleEn = isStorno ? 'REFUND' : 'RECEIPT';
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -101,11 +104,12 @@ function buildReceiptHTML(r: Receipt, s: BusinessSettings): string {
 <body>
 <button class="close-btn" onclick="window.close()">✕ Закрыть</button>
 <div class="header">
-  <div class="brand">קבלה</div>
-  <div class="brand-sub">RECEIPT</div>
+  <div class="brand">${docTitleHe}</div>
+  <div class="brand-sub">${docTitleEn}</div>
   <div class="receipt-meta">
     <div class="receipt-num">מספר ${r.receiptNumber}</div>
     <div>תאריך: ${formatDate(r.date)}</div>
+    ${isStorno ? `<div>בגין קבלה מספר ${r.relatedReceiptNumber}</div>` : ''}
   </div>
   <div class="biz">
     <strong>${s.ownerName}</strong><br>
