@@ -12,7 +12,7 @@ type Tab = 'main' | 'report' | 'settings';
 
 export default function App() {
   const { settings, loading: sLoading, updateSettings, reload: reloadSettings } = useSettings();
-  const { receipts, lastReceipt, loading: rLoading, issueReceipt, reload: reloadReceipts } = useReceipts();
+  const { receipts, lastReceipt, loading: rLoading, issueReceipt, stornoReceipt, reload: reloadReceipts } = useReceipts();
 
   const [screen, setScreen] = useState<Screen>('main');
   const [activeTab, setActiveTab] = useState<Tab>('main');
@@ -74,6 +74,15 @@ export default function App() {
             settings={settings}
             onBack={() => {
               setScreen(activeTab);
+            }}
+            onStorno={async (original, date) => {
+              const storno = await stornoReceipt(original, settings, date);
+              await reloadSettings();
+              return storno;
+            }}
+            onViewAfterStorno={(id) => {
+              reloadReceipts();
+              navTo({ type: 'view', id });
             }}
           />
         )}

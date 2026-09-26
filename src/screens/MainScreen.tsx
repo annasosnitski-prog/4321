@@ -79,9 +79,17 @@ export function MainScreen({ receipts, settings, onNewReceipt, onViewReceipt }: 
               <div className="receipt-row-num">#{r.receiptNumber}</div>
               <div className="receipt-row-body">
                 <div className="receipt-row-client">{r.clientName}</div>
+                {(r.docType === 'storno' || r.status === 'cancelled') && (
+                  <div className="receipt-row-badges">
+                    {r.docType === 'storno' && <span className="row-badge row-badge-storno">Возврат</span>}
+                    {r.status === 'cancelled' && <span className="row-badge row-badge-cancelled">Аннулирована</span>}
+                  </div>
+                )}
                 <div className="receipt-row-date">{formatDate(r.date)}</div>
               </div>
-              <div className="receipt-row-amount">{formatCurrency(r.totalAmount)}</div>
+              <div className={`receipt-row-amount ${r.status === 'cancelled' ? 'row-amount-cancelled' : ''} ${r.totalAmount < 0 ? 'row-amount-negative' : ''}`}>
+                {formatCurrency(r.totalAmount)}
+              </div>
               <div className="receipt-chevron">›</div>
             </button>
           ))}

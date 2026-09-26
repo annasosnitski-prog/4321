@@ -43,7 +43,12 @@ export interface Receipt {
   totalAmount: number;
   paymentMethod: PaymentMethod;
   note?: string;
-  status: 'saved';
+  status: 'saved' | 'cancelled';
+  docType: 'receipt' | 'storno';
+  // For a storno document: id/number of the receipt it reverses.
+  // For a cancelled receipt: id/number of the storno that reversed it.
+  relatedReceiptId?: string;
+  relatedReceiptNumber?: number;
   createdAt: string;
   year: number;
 }

@@ -806,3 +806,47 @@ input, select, textarea {
 .nav-btn.nav-active { color: var(--text); }
 .nav-icon { font-size: 22px; line-height: 1; }
 .nav-label { font-size: 10px; }
+
+/* ── Storno / refund ─────────────────────────────── */
+.receipt-row-badges { display: flex; gap: 4px; margin-top: 2px; flex-wrap: wrap; }
+.row-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+.row-badge-storno { background: rgba(217,48,37,0.1); color: var(--danger); }
+.row-badge-cancelled { background: var(--bg); color: var(--text-3); border: 1px solid var(--border); }
+.row-amount-cancelled { text-decoration: line-through; color: var(--text-3); }
+.row-amount-negative { color: var(--danger); }
+
+.view-status-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 99px;
+  margin-top: 8px;
+}
+.view-status-storno { background: rgba(217,48,37,0.1); color: var(--danger); }
+.view-status-cancelled { background: var(--bg); color: var(--text-3); border: 1px solid var(--border); }
+
+.action-btn-danger-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  transition: opacity 0.1s;
+}
+.action-btn-danger-full:active { opacity: 0.7; }
